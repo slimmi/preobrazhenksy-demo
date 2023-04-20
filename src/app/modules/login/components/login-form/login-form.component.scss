@@ -1,0 +1,13 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__message {
+    color: var(--color-red);
+    font-size: 14px;
+    line-height: 1;
+    min-height: 14px;
+    text-align: center;
+  }
+}

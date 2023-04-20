@@ -1,0 +1,69 @@
+<form
+  #formRef
+  class="login-form"
+  method="post"
+  [formGroup]="form"
+  (submit)="submitHandler()"
+>
+  <div class="field">
+    <label for="login-email" class="field__label">Email</label>
+    <input
+      id="login-email"
+      class="field__input"
+      type="email"
+      name="email"
+      formControlName="email"
+      autofocus
+      email
+      required
+    >
+    <label
+      for="login-email"
+      class="field__message"
+      [class.field__message--invalid]="email.invalid"
+    >
+      <ng-container *ngIf="email.errors && email.touched">
+        <ng-container *ngIf="email.errors['required']">Email is required</ng-container>
+        <ng-container *ngIf="email.errors['email']">Enter a valid email address</ng-container>
+      </ng-container>
+    </label>
+  </div>
+
+  <div class="field">
+    <label for="login-password" class="field__label">Password</label>
+    <input
+      id="login-password"
+      class="field__input"
+      type="password"
+      name="password"
+      formControlName="password"
+      minlength="6"
+      required
+    >
+    <label
+      for="login-password"
+      class="field__message"
+      [class.field__message--invalid]="password.invalid"
+    >
+      <ng-container *ngIf="password.errors && password.touched">
+        <ng-container *ngIf="password.errors['required']">Password is required</ng-container>
+        <ng-container *ngIf="password.errors['minlength']">Password must be at least 6 characters</ng-container>
+      </ng-container>
+    </label>
+  </div>
+
+  <button
+    class="button"
+    type="submit"
+    [disabled]="isPending"
+  >
+    <ng-container *ngIf="!isPending">
+      Login
+    </ng-container>
+    <ng-container *ngIf="isPending">
+      <span class="loader-spinner"></span>
+    </ng-container>
+  </button>
+
+  <div class="login-form__message">{{ message }}</div>
+</form>
